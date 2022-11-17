@@ -1,0 +1,24 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-weight: 300;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(132, 105, 105);
+}
+
+#app {
+  background-color: rgb(116, 132, 105);
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
