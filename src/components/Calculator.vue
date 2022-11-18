@@ -139,7 +139,6 @@ button {
 }
 
 .calculator {
-  /* border: red solid 2px; */
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
