@@ -96,44 +96,35 @@ import { ref } from "vue";
 export default {
   setup() {
     let displayValue = ref("0");
-    let firstNumber = ref("");
-    let secondNumber = ref("");
-    let operator = ref("");
+    let firstNumber = "";
+    let operator = null;
 
     function concatNum(num) {
-      if (operator.value === "") {
+      if (operator === null) {
         displayValue.value === "0"
           ? (displayValue.value = num)
           : (displayValue.value += num);
-      } else if (
-        operator.value === "-" ||
-        operator.value === "+" ||
-        operator.value === "*" ||
-        operator.value === "/"
-      ) {
-        secondNumber.value += num;
-        displayValue.value = secondNumber.value;
+      } else if (["+", "-", "*", "/"].includes(operator)) {
+        displayValue.value === firstNumber
+          ? (displayValue.value = num)
+          : (displayValue.value += num);
       }
     }
 
     function concatOp(op) {
-      firstNumber.value = displayValue.value;
-      operator.value = op;
+      firstNumber = displayValue.value;
+      operator = op;
     }
 
     function clear() {
       displayValue.value = "0";
-      firstNumber.value = "";
-      secondNumber.value = "";
-      operator.value = "";
+      firstNumber = "";
+      operator = null;
     }
 
     function calculate() {
-      displayValue.value = eval(
-        firstNumber.value + operator.value + secondNumber.value
-      );
-
-      firstNumber.value = displayValue.value;
+      displayValue.value = eval(firstNumber + operator + displayValue.value);
+      firstNumber = displayValue.value;
     }
 
     return { displayValue, concatNum, concatOp, clear, calculate };
@@ -151,7 +142,6 @@ button {
   /* border: red solid 2px; */
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 0 20px -5px;
@@ -169,7 +159,6 @@ button {
 
 .calculator-keys {
   display: grid;
-  gap: 0.2rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
     ".  .  .  ."
@@ -219,6 +208,7 @@ button {
 .equal {
   grid-area: equal;
   background-color: rgb(255, 163, 3);
+  border: 1px darkgrey solid;
 }
 
 .equal:hover,
@@ -245,10 +235,14 @@ button {
 .operator:focus {
   background-color: rgb(174, 174, 174);
 }
+.operator {
+  border: 1px darkgrey solid;
+}
 
 .number,
 .decimal,
 .clear {
   background-color: lightgrey;
+  border: 1px darkgrey solid;
 }
 </style>

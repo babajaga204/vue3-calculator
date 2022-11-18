@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -12,11 +13,10 @@ html {
 body {
   height: 100vh;
   width: 100vw;
-  background-color: rgb(132, 105, 105);
+  background-color: rgb(53, 58, 63);
 }
 
 #app {
-  background-color: rgb(116, 132, 105);
   padding: 5rem;
   display: flex;
   justify-content: center;
